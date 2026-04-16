@@ -26,9 +26,9 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://gemuxi.github.io/",
+	site: "https://floratopia.github.io/",
 	base: "/",
-	trailingSlash: "always",
+	trailingSlash: "ignore",
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -76,9 +76,9 @@ export default defineConfig({
 				codeBackground: "var(--codeblock-bg)",
 				borderRadius: "0.75rem",
 				borderColor: "none",
-				codeFontSize: "0.875rem",
-				codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-				codeLineHeight: "1.5rem",
+				codeFontSize: "1rem",
+				codeFontFamily: "'Hack', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeLineHeight: "1.35rem",
 				frames: {
 					editorBackground: "var(--codeblock-bg)",
 					terminalBackground: "var(--codeblock-bg)",

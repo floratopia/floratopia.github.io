@@ -1,7 +1,8 @@
 ---
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource/noto-sans-sc/400.css";
+import "@fontsource/noto-sans-sc/500.css";
+import "@fontsource/noto-sans-sc/700.css";
+import "hack-font/build/web/hack.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -216,8 +217,8 @@ import { siteConfig } from '../config';
 // (async function() {
 // 	try {
 // 		await Promise.all([
-// 			document.fonts.load("400 1em Roboto"),
-// 			document.fonts.load("700 1em Roboto"),
+// 			document.fonts.load("400 1em Noto Sans SC"),
+// 			document.fonts.load("700 1em Noto Sans SC"),
 // 		]);
 // 		document.body.classList.remove("hidden");
 // 	} catch (error) {
