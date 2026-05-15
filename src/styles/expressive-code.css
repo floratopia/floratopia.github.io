@@ -7,7 +7,7 @@
     .frame.is-terminal .header .title,
     .frame .editor-tab-bar .tab-title,
     .frame .header .title {
-        font-family: 'Hack', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
+        font-family: 'Lilex', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
         font-size: 0.875rem !important; /* ~14px */
     }
 }
