@@ -33,6 +33,9 @@ enum I18nKey {
 	publishedAt = "publishedAt",
 	license = "license",
 
+	tableOfContents = "tableOfContents",
+	tocEmpty = "tocEmpty",
+
 	// 404 page
 	notFound = "notFound",
 	notFoundTitle = "notFoundTitle",

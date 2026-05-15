@@ -1,0 +1,103 @@
+---
+import type { MarkdownHeading } from "astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import "@/styles/toc.css";
+
+interface Props {
+	headings?: MarkdownHeading[];
+	maxLevel?: number;
+	class?: string;
+	style?: string;
+}
+
+const {
+	headings: _headings = [],
+	maxLevel = 3,
+	class: className,
+	style,
+} = Astro.props;
+
+const title = i18n(I18nKey.tableOfContents);
+const emptyText = i18n(I18nKey.tocEmpty);
+---
+
+<div
+  id="sidebar-toc"
+  class:list={["card-base pb-4", className]}
+  style={style}
+>
+  <div class="widget-title font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+    before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+    before:absolute before:left-[-16px] before:top-[5.5px] flex items-center justify-between">
+    <span>{title}</span>
+  </div>
+  <div class="toc-scroll-container custom-scrollbar px-4">
+    <div
+      class="toc-content"
+      id="sidebar-toc-content"
+      data-empty-text={emptyText}
+      data-max-level={maxLevel}
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+.toc-scroll-container {
+  max-height: calc(100vh - 7rem);
+}
+</style>
+
+<script>
+  import { TOCManager } from "@/utils/toc-utils";
+
+  if (typeof (window as any).__sidebarTOC === "undefined") {
+    (window as any).__sidebarTOC = { manager: null as TOCManager | null };
+  }
+
+  async function initSidebarTOC() {
+    const tocContent = document.getElementById("sidebar-toc-content");
+    if (!tocContent) return;
+
+    const emptyText = tocContent.dataset.emptyText || undefined;
+    const maxLevel = Number(tocContent.dataset.maxLevel) || 3;
+
+    try {
+      if ((window as any).__sidebarTOC.manager) {
+        (window as any).__sidebarTOC.manager.cleanup();
+      }
+
+      const manager = new TOCManager({
+        contentId: "sidebar-toc-content",
+        indicatorId: "sidebar-active-indicator",
+        maxLevel,
+        scrollOffset: 80,
+        emptyText,
+      });
+
+      (window as any).__sidebarTOC.manager = manager;
+      manager.init();
+    } catch (error) {
+      console.error("Failed to init SidebarTOC:", error);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSidebarTOC);
+  } else {
+    initSidebarTOC();
+  }
+
+  document.addEventListener("swup:contentReplaced", () => {
+    setTimeout(initSidebarTOC, 100);
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    setTimeout(initSidebarTOC, 100);
+  });
+
+  window.addEventListener("popstate", () => {
+    setTimeout(initSidebarTOC, 200);
+  });
+</script>

@@ -1,7 +1,9 @@
 ---
 import type { MarkdownHeading } from "astro";
+import { siteConfig } from "../../config";
 import Categories from "./Categories.astro";
 import Profile from "./Profile.astro";
+import SidebarTOC from "./SidebarTOC.astro";
 import Tag from "./Tags.astro";
 
 interface Props {
@@ -10,13 +12,20 @@ interface Props {
 }
 
 const className = Astro.props.class;
+const tocEnabled = siteConfig.toc.enable;
+const tocDepth = siteConfig.toc.depth;
+const isPostPage = Astro.url.pathname.includes("/posts/");
 ---
-<div id="sidebar" class:list={[className, "w-full"]}>
+
+<div id="left-sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
         <Profile></Profile>
+        <div data-hide-on-post class:list={["flex flex-col gap-4", { hidden: isPostPage }]}>
+            <Categories class="onload-animation" style="animation-delay: 100ms"></Categories>
+            <Tag class="onload-animation" style="animation-delay: 150ms"></Tag>
+        </div>
     </div>
-    <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
-        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
-        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    <div id="left-sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 sticky top-4">
+        {tocEnabled && <div data-show-on-post class:list={[{ hidden: !isPostPage }]}><SidebarTOC headings={Astro.props.headings} maxLevel={tocDepth} class="onload-animation" style="animation-delay: 50ms"></SidebarTOC></div>}
     </div>
 </div>

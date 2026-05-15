@@ -4,7 +4,7 @@ import type { Translation } from "../translation";
 export const zh_CN: Translation = {
 	[Key.home]: "主页",
 	[Key.about]: "关于",
-	[Key.archive]: "归档",
+	[Key.archive]: "文章",
 	[Key.search]: "搜索",
 
 	[Key.tags]: "标签",
@@ -31,6 +31,9 @@ export const zh_CN: Translation = {
 	[Key.systemMode]: "跟随系统",
 
 	[Key.more]: "更多",
+
+	[Key.tableOfContents]: "文章目录",
+	[Key.tocEmpty]: "当前页面没有目录",
 
 	[Key.author]: "作者",
 	[Key.publishedAt]: "发布于",
